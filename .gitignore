@@ -35,4 +35,4 @@ nosetests.xml
 .project
 .pydevproject
 
-app/static/components/*
+app/static/components
