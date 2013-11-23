@@ -18,7 +18,19 @@
     </div>
     <div>TV Shows: <a href="/index">Home</a></div>
     <hr />
-    {% block content %}{% endblock %}
+    <div class="main">
+      {% block main %}{% endblock %}
+      <div class="content">
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        {% for message in messages %}
+        <div class="flash">{{ message }} </div>
+        {% endfor %}
+        {% endif %}
+        {% endwith %}
+        {% block content %}{% endblock %}
+      </div>
+    </div>
   </div>
 </body>
 </html>
