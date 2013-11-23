@@ -1,0 +1,156 @@
+* {
+    margin: 0;
+}
+html, body {
+    height: 100%;
+}
+
+body {
+    color: #222;
+    font-family: Georgia, serif;
+    background-color: #E0DED7;
+}
+a{
+    color: #303285;
+    text-decoration: none;
+}
+a:hover{
+    color: #ff4f00;
+}
+h2 {
+    width: 100%;
+    border-bottom: 1px solid #222;
+}
+.root {
+    min-height: 100%;
+    height: auto !important;
+    height: 100%;
+    margin: 0 auto -35px;
+    width: 900px;
+    background-color: #fff;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.7);
+}
+.home {
+    padding-top: 5px;
+}
+.content {
+    padding: 0px 75px 5px;
+    text-align: justify;
+}
+.header {
+    background-color: #222;
+    color: #eee;
+    height: 80px;
+    display: table;
+    width: 100%;
+}
+.header a{
+    color: #eee;
+}
+.header a:hover{
+    color: #ff4f00;
+}
+.pageheading {
+    padding-left: 68px;
+    display: table-cell;
+    vertical-align: middle;
+}
+.userinfo {
+    font-size: 0.8em;
+    text-align: right;
+    padding-right: 10px;
+    display: table-cell;
+    vertical-align: middle;
+}
+.banner {
+    text-align: center;
+    padding-bottom: 5px;
+}
+.footer, .push {
+    height: 35px;
+}
+.footer {
+    margin: 0 auto;
+    width: 900px;
+}
+
+div.search {
+    padding: 15px 10px 15px 0px;
+    text-align: right;
+}
+div.search input.show {
+    width: 220px;
+    color: #888;
+}
+
+div.actions {
+    width: 100%;
+    text-align: center;
+    padding-bottom: 10px;
+}
+
+div.flash {
+    color: red;
+}
+
+table.result {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+table.result tr:hover {
+    background-color: #eee;
+}
+
+table.result td, th {
+    border: 1px solid #222222;
+    padding: 4px;
+}
+
+table.seriesinfo {
+    float: right;
+    border-collapse: collapse;
+    margin-left: 15px;
+    width: 200px;
+}
+
+table.seriesinfo td, th {
+    border: 1px solid #ccc;
+    padding: 4px;
+}
+
+table.usershows {
+    width: 100%;
+    margin-top: 10px;
+}
+
+table.upcoming {
+    margin-top: 10px;
+    border-collapse: collapse;
+}
+
+table.upcoming td, th {
+    padding: 4px 8px 4px 4px;
+    border: 0;
+}
+
+.brackets {
+    color: #319BC2;
+}
+
+.brackets:before {
+    content: "[";
+}
+
+.brackets:after {
+    content: "]";
+}
+
+img.poster {
+    width: 170px;
+    height: 250px;
+}
+
+input.logo {
+    width: 50px;
+}
