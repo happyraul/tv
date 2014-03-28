@@ -12,6 +12,13 @@
     <div class="header">
       <div class="pageheading">
         {% block header %}{% endblock %}
+          <div class="userinfo">
+          {% if current_user.is_authenticated() %}
+            Welcome, {{ user.name }}.<br />
+            <br />
+            <span class="brackets"><a href="{{ url_for('auth.logout') }}">Logout</a></span>
+          {% endif %}
+          </div>
       </div>
       <div class="userinfo">
       </div>
