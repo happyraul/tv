@@ -154,3 +154,7 @@ img.poster {
 input.logo {
     width: 40px;
 }
+
+img.profile-avatar {
+    float: left;
+}
