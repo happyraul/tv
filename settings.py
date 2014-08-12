@@ -6,6 +6,7 @@ environment = {
 	'MAIL_PASSWORD': 'example_password',
 	'MAIL_USERNAME': 'user@example.com',
 	'SECRET_KEY': 'changeme',
+	'SNOW_DAY_ADMIN': 'admin',
 	'TEST_DATABASE_PASSWORD': 'tv_password',
 	'TEST_DATABASE_USER': 'tv_user',
 }
