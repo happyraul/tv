@@ -1,43 +1,54 @@
 <html>
 <head>
-  {% if title %}
-  <title>TV Shows | {{title}}</title>
-  {% else %}
-  <title>TV Shows</title>
-  {% endif %}
-  <link rel="stylesheet" type="text/css" href="/static/css/shows.css" />
+    {% if title %}
+        <title>Snow Day | {{title}}</title>
+    {% else %}
+        <title>Snow Day</title>
+    {% endif %}
+    <link rel="stylesheet" type="text/css" href="/static/css/shows.css" />
 </head>
 <body>
-  <div class="root">
-    <div class="header">
-      <div class="pageheading">
-        {% block header %}{% endblock %}
-          <div class="userinfo">
-          {% if current_user.is_authenticated() %}
-            Welcome, {{ user.name }}.<br />
-            <br />
-            <span class="brackets"><a href="{{ url_for('auth.logout') }}">Logout</a></span>
-          {% endif %}
-          </div>
-      </div>
-      <div class="userinfo">
-      </div>
+    <div class="root">
+        <div class="header">
+            <div class="pageheading">
+                {% block header %}{% endblock %}
+                <!-- <div class="userinfo">
+                </div> -->
+            </div>
+            <div class="userinfo">
+                {% if current_user.is_authenticated() %}
+                    <img src="{{current_user.avatar(40)}}">
+                    <br />
+                    <br />
+                    <span class="brackets">
+                        <a href="{{ url_for('main.user') }}">Shows</a>
+                    </span>
+                    <span class="brackets">
+                        <a href="{{ url_for('main.profile') }}">
+                            {{ current_user.name }}
+                        </a>
+                    </span>
+                    <span class="brackets">
+                        <a href="{{ url_for('auth.logout') }}">Logout</a>
+                    </span>
+                {% endif %}
+            </div>
+        </div>
+        <!-- <div>TV Shows: <a href="/index">Home</a></div> -->
+        <hr />
+        <div class="main">
+            {% block main %}{% endblock %}
+            <div class="content">
+                {% with messages = get_flashed_messages() %}
+                    {% if messages %}
+                        {% for message in messages %}
+                            <div class="flash">{{ message }}</div>
+                        {% endfor %}
+                    {% endif %}
+                {% endwith %}
+                {% block content %}{% endblock %}
+            </div>
+        </div>
     </div>
-    <div>TV Shows: <a href="/index">Home</a></div>
-    <hr />
-    <div class="main">
-      {% block main %}{% endblock %}
-      <div class="content">
-        {% with messages = get_flashed_messages() %}
-        {% if messages %}
-        {% for message in messages %}
-        <div class="flash">{{ message }} </div>
-        {% endfor %}
-        {% endif %}
-        {% endwith %}
-        {% block content %}{% endblock %}
-      </div>
-    </div>
-  </div>
 </body>
 </html>
