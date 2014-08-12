@@ -19,25 +19,29 @@ from .. import db
 #             'body': 'The Avengers movie was so cool!'
 #         }
 #     ]
-#     return render_template("index.html", title='Home', user=current_user, posts=posts)
+#     return render_template("index.html", title='Home', user=current_user,
+#                            posts=posts)
+
 
 @main.route('/')
 @login_required
 def user():
-    if current_user == None:
+    if current_user is None:
         flash('Must be logged in to see this page.')
         return redirect(url_for('auth.login'))
     return render_template('user.html',
-        user=current_user,
-        favorites=[])
-    
+                           user=current_user,
+                           favorites=[])
+
+
 @main.route('/profile')
 @login_required
 def profile():
-    if current_user == None:
+    if current_user is None:
         flash('Must be logged in to see this page.')
         return redirect(url_for('auth.login'))
     return render_template('profile.html', user=current_user)
+
 
 @main.route('/edit-profile', methods=['GET', 'POST'])
 @login_required
