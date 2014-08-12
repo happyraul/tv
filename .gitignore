@@ -37,4 +37,4 @@ nosetests.xml
 
 app/static/components
 
-config.py
+settings.py
