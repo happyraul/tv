@@ -36,7 +36,7 @@ Snow Day
 
     Add line:
 
-        local   tv_dev,tv_test,tv   snow_day    md5
+        local   tv_dev,tv_test,tv   $DEV_DATABASE_USER    md5
 
 6. Initialize data
 
