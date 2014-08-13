@@ -37,6 +37,18 @@
         <!-- <div>TV Shows: <a href="/index">Home</a></div> -->
         <hr />
         <div class="main">
+                <div class="search">
+                    {% if user %}
+                    <form action="/result" method="get">
+                        {% if search_series %}
+                        <input value="{{ search_series }}" class="show" type="text" name="seriesname" id="seriesname" onfocus="javascript:this.value='';this.style.color='#000';" onclick="javascript:this.value='';this.style.color='#000';">
+                        {% else %}
+                        <input value="Enter all or part of a series name" class="show" type="text" name="seriesname" id="seriesname" onfocus="javascript:this.value='';this.style.color='#000';" onclick="javascript:this.value='';this.style.color='#000';">
+                        {% endif %}
+                        <input type="submit" value="Search">
+                    </form>
+                    {% endif %}
+                </div>
             {% block main %}{% endblock %}
             <div class="content">
                 {% with messages = get_flashed_messages() %}
