@@ -1,5 +1,5 @@
 import os
-from flask import Flask, render_template
+from flask import Flask
 from flask.ext.sqlalchemy import SQLAlchemy
 from flask.ext.login import LoginManager
 from flask.ext.openid import OpenID
@@ -12,6 +12,7 @@ login_manager = LoginManager()
 login_manager.session_protection = 'strong'
 login_manager.login_view = 'auth.login'
 oid = OpenID(fs_store_path=os.path.join(basedir, 'tmp'))
+
 
 def create_app(config_name):
     app = Flask(__name__)
