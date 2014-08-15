@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block header %}
+                <h1>You searched for "{{ search_series }}"</h1>
+{% endblock %}
+{% block content %}
+                <table class="result">
+                {% for series in series_list %}
+                    <tr>
+                        <td>
+                            <em>{{ series.name }}</em>
+                        </td>
+                        <td style="text-align: center;">
+                            <a href="/detail/{{ series.id }}">view details</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </table>
+{% endblock %}
