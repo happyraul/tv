@@ -29,9 +29,8 @@ def user():
     if current_user is None:
         flash('Must be logged in to see this page.')
         return redirect(url_for('auth.login'))
-    return render_template('user.html',
-                           user=current_user,
-                           favorites=[])
+    return render_template('user.html', user=current_user, favorites=[],
+                           title='Shows')
 
 
 @main.route('/profile')
@@ -40,7 +39,7 @@ def profile():
     if current_user is None:
         flash('Must be logged in to see this page.')
         return redirect(url_for('auth.login'))
-    return render_template('profile.html', user=current_user)
+    return render_template('profile.html', user=current_user, title='Profile')
 
 
 @main.route('/edit-profile', methods=['GET', 'POST'])
@@ -55,4 +54,5 @@ def edit_profile():
         return redirect(url_for('.profile'))
     else:
         form.name.data = current_user.name
-    return render_template('edit-profile.html', user=current_user, form=form)
+    return render_template('edit-profile.html', user=current_user, form=form,
+                           title='Edit Profile')
