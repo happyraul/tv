@@ -10,7 +10,7 @@
                             <em>{{ series.name }}</em>
                         </td>
                         <td style="text-align: center;">
-                            <a href="/detail/{{ series.id }}">view details</a>
+                            <a href="{{ url_for('series.detail', series_id=series.id) }}">view details</a>
                         </td>
                     </tr>
                 {% endfor %}

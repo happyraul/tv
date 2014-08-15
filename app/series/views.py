@@ -8,7 +8,6 @@ from . import series
 @series.route('/result')
 @login_required
 def result():
-    current_app.logger.debug('reached search page')
     if current_user is None:
         flash('Must be logged in to see this page.')
         return redirect(url_for('auth.login'))
@@ -22,10 +21,10 @@ def result():
         if response['response']:
             results_list = response['series_list']
             if len(results_list) == 1:
-                return redirect(url_for('detail',
+                return redirect(url_for('series.detail',
                                 series_id=results_list[0]['id']))
             else:
-                return render_template('result.html',
+                return render_template('series/result.html',
                                        search_series=search_series,
                                        series_list=results_list,
                                        title='Results',
@@ -34,3 +33,9 @@ def result():
             flash('Your search term "%s" did not yield any results.' %
                   search_series)
             return redirect(url_for('main.user'))
+
+
+@series.route('/detail/<int:series_id>')
+@login_required
+def detail(series_id):
+    return str(series_id)
