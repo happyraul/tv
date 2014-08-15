@@ -29,7 +29,6 @@ def login():
         # flash('Login requested for OpenID="' + form.openid.data +
         #     '", remember_me=' + str(form.remember_me.data))
         return oid.try_login(form.openid.data, ask_for=['nickname', 'email'])
-        #return redirect(request.args.get('next') or url_for('main.index'))
     return render_template('auth/login.html', title='Sign In', form=form)
 
 
@@ -38,7 +37,7 @@ def login():
 def logout():
     logout_user()
     flash('You have been logged out.')
-    return redirect(url_for('main.user'))
+    return redirect(url_for('.login'))
 
 
 @oid.after_login
