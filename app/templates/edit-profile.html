@@ -5,16 +5,13 @@
 {% block content %}
                 <div class="home">
                     <form action="" method="post" name="edit">
-                        {{form.hidden_tag()}}
+                        {{ form.hidden_tag() }}
                         <h2>Details</h2>
                         <br>
-                        <img class="profile-avatar"
-                            src="{{user.avatar(128)}}"
-                            alt="Avatar">
-                        Joined: {{ user.created_at }}<br>
-                        Last seen: {{ user.last_seen }}<br>
-                        Email: {{ user.email }}<br>
-                        Name: {{ form.name(size = 24) }}<br>
+                        <img class="profile-avatar" src="{{user.avatar(128)}}" alt="Avatar">
+                        Joined {{ moment(user.created_at).fromNow(refresh=True) }}<br>
+                        {{ user.email }}<br>
+                        Name: {{ form.name(size = 24) }} <input type="submit" value="Save">
                     </form>
                 </div>
 {% endblock %}

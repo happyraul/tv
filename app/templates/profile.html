@@ -6,11 +6,9 @@
                 <div class="home">
                     <h2>Details</h2>
                     <br>
-                    <img class="profile-avatar" src="{{user.avatar(160)}}" alt="Avatar">
-                    <dt>Joined:</dt> <dd>{{ user.created_at }}</dd>
-                    <dt>Last seen:</dt> <dd>{{ user.last_seen }}</dd>
-                    <dt>Email:</dt> <dd>{{ user.email }}</dd>
-                    <dt>Name:</dt> <dd>{{ user.name }}</dd><br>
-                    <a href="{{ url_for('main.edit_profile') }}">Edit</a>
+                    <img class="profile-avatar" src="{{user.avatar(128)}}" alt="Avatar">
+                    Joined {{ moment(user.created_at).fromNow(refresh=True) }}<br>
+                    {{ user.email }}<br>
+                    Name: {{ user.name }} <a href="{{ url_for('main.edit_profile') }}">edit</a>
                 </div>
 {% endblock %}
