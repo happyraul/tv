@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block header %}
+                <h1>Shows</h1>
+{% endblock %}
+{% block content %}
+                <div class="home">
+                    <h2>Upcoming Episodes</h2>
+                    <table class="upcoming">
+                        <tr>
+                            <th>Date</th>
+                            <th>Show</th>
+                            <th>Episode Title</th>
+                        </tr>
+                    {% for episode in user.upcoming() %}
+                        <tr>
+                            <td>{{ episode.air_date }}</td>
+                            <td>{{ episode.series.name }}</td>
+                            <td>{{ episode.name }}</td>
+                        </tr>
+                    {% endfor %}
+                    </table>
+                    <br />
+                    <h2>All Shows</h2>
+                    <table class="usershows">
+                        <tr>
+                        {% for series in favorites %}
+                        {% if not loop.first and loop.index0 % 4 == 0 %}
+                        </tr>
+                        <tr>
+                        {% endif %}
+                        {% set image = series.image('poster', user) %}
+                            <td>
+                                <a href="{{ url_for('detail', series_id = series.id) }}"><img src="/static/img/user-{{ user.id }}/{{ series.id }}/poster/{{ image }}"
+                                alt="{{ series.name }}" class="poster" /></a><br />
+                                <span class="brackets"><a href="{{ url_for('delete_image', series_id = series.id, type = 'poster', file = image) }}">remove poster</a></span><br />
+                                <span class="brackets"><a href="{{ url_for('delete', series_id = series.id) }}">remove show</a></span><br /><br />
+                            </td>
+                        {% endfor %}
+                        </tr>
+                    </table>
+                </div>
+{% endblock %}

@@ -1,0 +1,13 @@
+<!-- extend from base layout -->
+{% extends "base.html" %}
+{% block header %}
+<h1>Sign In</h1>
+{% endblock %}
+{% block content %}
+<form action="" method="post" name="login">
+    {{form.hidden_tag()}}
+    <p>Click the icon below to sign in with your Google account</p>
+    <input class="logo" type="image" name="" src="/static/img/google.png" alt="icon" />
+    <p>{{form.remember_me}} Remember Me</p>
+</form>
+{% endblock %}
