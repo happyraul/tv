@@ -26,9 +26,6 @@ from .. import db
 @main.route('/')
 @login_required
 def user():
-    if current_user is None:
-        flash('Must be logged in to see this page.')
-        return redirect(url_for('auth.login'))
     return render_template('user.html', user=current_user, favorites=[],
                            title='Shows')
 
@@ -36,9 +33,6 @@ def user():
 @main.route('/profile')
 @login_required
 def profile():
-    if current_user is None:
-        flash('Must be logged in to see this page.')
-        return redirect(url_for('auth.login'))
     return render_template('profile.html', user=current_user, title='Profile')
 
 
