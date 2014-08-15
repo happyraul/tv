@@ -11,7 +11,7 @@
                         <img class="profile-avatar" src="{{user.avatar(128)}}" alt="Avatar">
                         Joined {{ moment(user.created_at).fromNow(refresh=True) }}<br>
                         {{ user.email }}<br>
-                        Name: {{ form.name(size = 24) }} <input type="submit" value="Save">
+                        Name: {{ form.name(size = 16) }} {{ form.save() }}
                     </form>
                 </div>
 {% endblock %}
