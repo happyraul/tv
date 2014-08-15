@@ -40,7 +40,7 @@
         <div class="main">
                 <div class="search">
                     {% if user %}
-                    <form action="/result" method="get">
+                    <form action="{{ url_for('series.result') }}" method="get">
                         {% if search_series %}
                         <input value="{{ search_series }}" class="show" type="text" name="seriesname" id="seriesname" onfocus="javascript:this.value='';this.style.color='#000';" onclick="javascript:this.value='';this.style.color='#000';">
                         {% else %}
