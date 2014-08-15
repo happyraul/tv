@@ -16,11 +16,11 @@
                 <!-- <div class="userinfo">
                 </div> -->
             </div>
-            <div class="userinfo">
+            <div class="user-info">
                 {% if current_user.is_authenticated() %}
-                    <img src="{{current_user.avatar(40)}}">
-                    <br />
-                    <br />
+                    <div class="user-avatar">
+                        <img src="{{current_user.avatar(40)}}">
+                    </div>
                     <span class="brackets">
                         <a href="{{ url_for('main.user') }}">Shows</a>
                     </span>

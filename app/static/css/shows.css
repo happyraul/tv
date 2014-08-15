@@ -55,12 +55,15 @@ h2 {
     display: table-cell;
     vertical-align: middle;
 }
-.userinfo {
+.user-info {
     font-size: 0.8em;
     text-align: right;
-    padding-right: 10px;
+    padding-right: 68px;
     display: table-cell;
     vertical-align: middle;
+}
+.user-avatar {
+    padding: 8px 1px 8px 0px;
 }
 .banner {
     text-align: center;
@@ -75,7 +78,7 @@ h2 {
 }
 
 div.search {
-    padding: 15px 10px 15px 0px;
+    padding: 15px 68px 15px 0px;
     text-align: right;
 }
 div.search input.show {
