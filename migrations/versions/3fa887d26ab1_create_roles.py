@@ -14,20 +14,18 @@ from alembic import op
 import sqlalchemy as sa
 
 roles_table = sa.sql.table('roles',
-    sa.sql.column('id', sa.Integer),
-    sa.sql.column('name', sa.String)
-)
+                           sa.sql.column('id', sa.Integer),
+                           sa.sql.column('name', sa.String))
+
 
 def upgrade():
     op.bulk_insert(roles_table,
-        [
-            {'id':1, 'name': 'admin'},
-            {'id':2, 'name': 'user'}
-        ]
-    )
+                   [{'id': 1, 'name': 'admin'},
+                    {'id': 2, 'name': 'user'}])
+
 
 def downgrade():
-    op.execute(roles_table.delete().\
-        where(roles_table.c.id==op.inline_literal(1)))
-    op.execute(roles_table.delete().\
-        where(roles_table.c.id==op.inline_literal(2)))
+    op.execute(roles_table.delete().
+               where(roles_table.c.id == op.inline_literal(1)))
+    op.execute(roles_table.delete().
+               where(roles_table.c.id == op.inline_literal(2)))
