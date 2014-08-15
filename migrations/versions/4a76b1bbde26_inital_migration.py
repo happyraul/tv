@@ -26,7 +26,8 @@ def upgrade():
                     sa.Column('name', sa.String(length=64), nullable=True),
                     sa.Column('email', sa.String(length=120), nullable=True),
                     sa.Column('role_id', sa.Integer(), nullable=True),
-                    sa.ForeignKeyConstraint(['role_id'], ['roles.id'], ),
+                    sa.ForeignKeyConstraint(['role_id'], ['roles.id'],
+                                            ondelete='cascade'),
                     sa.PrimaryKeyConstraint('id'))
     op.create_index('ix_users_email', 'users', ['email'], unique=True)
     op.create_index('ix_users_name', 'users', ['name'], unique=False)
