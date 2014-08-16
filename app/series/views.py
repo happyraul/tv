@@ -1,8 +1,10 @@
-from flask import current_app, flash, redirect, url_for, request,\
-    render_template
+from flask import flash, redirect, url_for, request, render_template,\
+    current_app
 from flask.ext.login import login_required, current_user
+from ..models import Series, STATUSES, DAYS_OF_WEEK
 from tvdb import TvSeries
 from . import series
+import operator
 
 
 @series.route('/result')
@@ -38,4 +40,21 @@ def result():
 @series.route('/detail/<int:series_id>')
 @login_required
 def detail(series_id):
-    return str(series_id)
+    series = Series.query.get(int(series_id))
+    if series is None:
+        current_user.save_images(series_id)
+
+    base_series = TvSeries.get_base_series(series_id)
+    if base_series['response']:
+        for e in base_series['episodes']:
+            if e.air_date is None:
+                current_app.logger.debug(str(e.id) + " has no air date.")
+        episodes = sorted(base_series['episodes'],
+                          key=operator.attrgetter("air_date"))
+        return render_template('detail.html', series=base_series['series'],
+                               episodes=episodes, title='Detail',
+                               user=current_user, statuses=STATUSES,
+                               days=DAYS_OF_WEEK,)
+    else:
+        flash("Series detail not found.")
+        return redirect(url_for('user'))
