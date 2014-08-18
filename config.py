@@ -9,6 +9,10 @@ class Config:
     TV_MAIL_SUBJECT_PREFIX = '[Snow Day]'
     TV_MAIL_SENDER = 'Snow Day Admin <admin@snow-day.com>'
     TV_ADMIN = environment['SNOW_DAY_ADMIN']
+    TVDB_API_KEY = environment['TVDB_API_KEY']
+    AWS_BUCKET = environment['AWS_BUCKET']
+    AWS_ACCESS_KEY = environment['AWS_ACCESS_KEY']
+    AWS_SECRET_KEY = environment['AWS_SECRET_KEY']
 
     @staticmethod
     def init_app(app):
