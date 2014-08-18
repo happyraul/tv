@@ -124,7 +124,8 @@ class Series(db.Model):
 class Episode(db.Model):
     __tablename__ = 'episodes'
     id = db.Column(db.Integer, primary_key=True)
-    series_id = db.Column(db.Integer, db.ForeignKey('series.id'))
+    series_id = db.Column(db.Integer, db.ForeignKey('series.id'),
+                          nullable=False)
     season = db.Column(db.Integer)
     episode_number = db.Column(db.Integer)
     name = db.Column(db.String())
@@ -149,7 +150,15 @@ class Image(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     episode_id = db.Column(db.Integer, db.ForeignKey('episodes.id'),
                            nullable=True)
-    series_id = db.Column(db.Integer, db.ForeignKey('series.id'))
-    key = db.Column(db.String)
+    series_id = db.Column(db.Integer, db.ForeignKey('series.id'),
+                          nullable=False)
+    source = db.Column(db.String, nullable=False, unique=True)
+    key = db.Column(db.String, nullable=False, unique=True)
     type = db.Column(db.Enum('poster', 'series', 'fanart', 'season',
-                     name='image_types'))
+                     name='image_types'), nullable=False)
+
+    def __repr__(self):
+        return '<Image %r>' % (self.key)
+
+    def __unicode__(self):
+        return '<Image %r>' % (self.key)
