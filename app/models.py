@@ -1,8 +1,13 @@
 from app import db
+from flask import current_app
 from flask.ext.login import UserMixin
 from . import login_manager
 from hashlib import md5
+from boto.s3.connection import S3Connection
+from boto.s3.key import Key
 import random
+import os
+import requests
 
 IMAGE_TYPES = ['poster', 'series', 'fanart', 'season']
 
@@ -22,9 +27,15 @@ DAYS_OF_WEEK.update(dict((DAYS_OF_WEEK[k], k) for k in DAYS_OF_WEEK))
 
 user_images = db.Table('user_images',
                        db.Column('user_id', db.Integer,
-                                 db.ForeignKey('users.id')),
+                                 db.ForeignKey('users.id'), nullable=False),
                        db.Column('image_id', db.Integer,
-                                 db.ForeignKey('images.id')))
+                                 db.ForeignKey('images.id'), nullable=False))
+
+user_series = db.Table('user_series',
+                       db.Column('user_id', db.Integer,
+                                 db.ForeignKey('users.id'), nullable=False),
+                       db.Column('series_id', db.Integer,
+                                 db.ForeignKey('series.id'), nullable=False))
 
 
 class Role(db.Model):
