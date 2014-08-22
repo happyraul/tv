@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+{% block header %}
+                <h1>{{ series.name }}</h1>
+{% endblock %}
+{% block main %}
+                {% set image = series.image('series', user) %}
+                {% if image %}
+                <div class="banner">
+                    {% if series in user.favorites.all() %}
+                    <img src="{{ image.get_url() }}"
+                        alt="{{ series.name }}" class="banner" />
+                    {% else %}
+                    <img src="{{ image.get_url() }}"
+                        alt="{{ series.name }}" class="banner" />
+                    {% endif %}
+                </div>
+                {% endif %}
+{% endblock %}
+{% block content %}
+                    {% if series not in user.favorites.all() %}
+                    <div class="actions">
+                        <span class="brackets"><a href="">add to my shows</a></span>
+                    </div>
+                    {% endif %}
+                    <table class="seriesinfo">
+                        {% if series.air_day %}
+                        <tr>
+                            <td>Air Day:</td>
+                            <td>{{ days[series.air_day] }}</td>
+                        </tr>
+                        {% endif %}
+                        {% if series.air_time %}
+                        <tr>
+                            <td>Air Time:</td>
+                            {% set minute = "%02d" % series.air_time.minute %}
+                            <td>{{ series.air_time.hour }}:{{ minute }}</td>
+                        </tr>
+                        {% endif %}
+                        <tr>
+                            <td>Rating:</td>
+                            <td>{{ series.rating }} ({{ series.rating_count }} votes)</td>
+                        </tr>
+                        <tr>
+                            <td>Status:</td>
+                            <td>{{ statuses[series.status] }}</td>
+                        </tr>
+                        <tr>
+                            <td>Network:</td>
+                            <td>{{ series.network }}</td>
+                        </tr>
+                    </table>
+                    <div>{{ series.overview }}</div>
+                    <br />
+                    <div><a href="/download_images/{{ series.id }}">Download Images</a></div><br />
+                    <!-- <table>
+                        {% for episode in episodes %}
+                        <tr>
+                            <td style="width: 100px;">{{ episode.air_date }}</td>
+                            <td>S{{ episode.season }}E{{ episode.episode_number }}</td>
+                            <td>{{ episode.name }}</td>
+                        </tr>
+                        {% endfor %}
+                    </table> -->
+
+                    <table class="usershows">
+                        {% for episode in episodes %}
+                        <tr>
+                        {% set image = episode.image(user) %}
+                            <td>
+                                {% if image %}
+                                <img src="{{ image.get_url() }}"
+                                alt="{{ episode.name }}" style="width: 200px; height: 113px" />
+                                {% endif %}
+                            </td>
+                            <td>
+                                {{ episode.air_date }}<br />
+                                S{{ episode.season }}E{{ episode.episode_number }} - {{ episode.name }}<br />
+                                {{ episode.overview }}
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </table>
+{% endblock %}
