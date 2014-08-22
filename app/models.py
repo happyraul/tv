@@ -55,6 +55,8 @@ class User(UserMixin, db.Model):
     email = db.Column(db.String(120), index=True, unique=True)
     role_id = db.Column(db.Integer, db.ForeignKey('roles.id'))
     images = db.relationship('Image', secondary=user_images, lazy='dynamic')
+    favorites = db.relationship('Series', secondary=user_series,
+                                lazy='dynamic')
     created_at = db.Column(db.DateTime)
     updated_at = db.Column(db.DateTime)
     last_seen = db.Column(db.DateTime)
