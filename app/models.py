@@ -129,9 +129,9 @@ class Series(db.Model):
 
     def all_images(self, type, user):
         if self in user.favorites.all():
-            return (user.images.filter_by(series=self, type=type).all())
+            return user.images.filter_by(series=self, type=type).all()
         else:
-            return self.images.filter_by(type=type).all()
+            return self.images.filter_by(type=type, episode=None).all()
 
 
 class Episode(db.Model):
@@ -155,7 +155,7 @@ class Episode(db.Model):
         return '<Episode %r>' % (self.name)
 
     def image(self, user):
-        return (random.choice(self.images) if self.images else "")
+        return (random.choice(self.images.all()) if self.images.all() else "")
 
 
 class Image(db.Model):
