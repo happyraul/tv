@@ -170,6 +170,31 @@ class Image(db.Model):
     type = db.Column(db.Enum('poster', 'series', 'fanart', 'season',
                      name='image_types'), nullable=False)
 
+    def save(self):
+        conn = S3Connection(current_app.config['AWS_ACCESS_KEY'],
+                            current_app.config['AWS_SECRET_KEY'])
+        bucket = conn.get_bucket(current_app.config['AWS_BUCKET'],
+                                 validate=False)
+        key = Key(bucket, self.key)
+
+        if not key.exists():
+            current_app.logger.debug("Saving image: %s" % self.source)
+
+            r = requests.get(self.source)
+            if r.status_code == 200:
+                key.set_contents_from_string(r.content)
+
+        else:
+            current_app.logger.debug("Image: %s already saved." % self.key)
+
+    def get_url(self):
+        conn = S3Connection(current_app.config['AWS_ACCESS_KEY'],
+                            current_app.config['AWS_SECRET_KEY'])
+        bucket = conn.get_bucket(current_app.config['AWS_BUCKET'],
+                                 validate=False)
+        key = Key(bucket, self.key)
+        return key.generate_url(600)
+
     def __repr__(self):
         return '<Image %r>' % (self.key)
 
